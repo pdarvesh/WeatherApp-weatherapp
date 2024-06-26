@@ -1,6 +1,6 @@
 export class WeekData{
     day:string;
     summaryImage:string;
-    tempMax:string;
-    tempMin:string;
+    tempMax:number;
+    tempMin:number;
 }

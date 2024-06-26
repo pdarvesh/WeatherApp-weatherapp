@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { LocationDetails } from '../Models/LocationDetails';
 import { WeatherDetails } from '../Models/WeatherDetails';
 import { TemperatureData } from '../Models/TemperatureData';
-import { TodayData } from '../Models/TodayData';
+import { Todaydata } from '../Models/TodayData';
 import { WeekData } from '../Models/WeekData';
 import { TodaysHighlight } from '../Models/TodaysHighlight';
 import { Observable } from 'rxjs';
@@ -20,15 +20,15 @@ export class WeatherService {
   weatherDetails?: WeatherDetails;
 
   //variables that have the extracted data from the api endpoint variables
-  temperatureData: TemperatureData = new TemperatureData();// left container data
+  temperatureData: TemperatureData // left container data
   
-  todaydata: TodayData[] = []; //right container Todaydata
+  todaydata: Todaydata[] = []; //right container Todaydata
   weekData: WeekData[] = [];   //right container weekdata
 
-  todaysHighlight?: TodaysHighlight =new TodaysHighlight(); //right container TodaysHighlight
+  todaysHighlight?: TodaysHighlight  //right container TodaysHighlight
   
   //variables to be used for api call
-  cityName:string ='Mumbai';
+  cityName:string ='Chicago';
   language:string ='en-US';
   date:string = '20240622';
   units: string = 'm';
@@ -48,7 +48,6 @@ export class WeatherService {
 
   constructor(private httpClient: HttpClient) { 
     this.getData();
-
   }
 
   getSummaryImage(summary:string):string{
@@ -80,7 +79,7 @@ export class WeatherService {
     this.temperatureData.day = this.weatherDetails['v3-wx-observations-current'].dayOfWeek;
     this.temperatureData.time = `${String(this.currentTime.getHours()).padStart(2,'0')}:${String(this.currentTime.getMinutes()).padStart(2,'0')}`;
     this.temperatureData.temperature = this.weatherDetails ['v3-wx-observations-current'].temperature;
-    this.temperatureData.location = `${this.locationDetails.location.city[0]},${this.locationDetails.location.country}`;
+    this.temperatureData.location = `${this.locationDetails.location.city[0]},${this.locationDetails.location.country[0]}`;
     this.temperatureData.rainPercent = this.weatherDetails['v3-wx-observations-current'].precip24Hour;
     this.temperatureData.summaryPhrase = this.weatherDetails['v3-wx-observations-current'].wxPhraseMedium;
     this.temperatureData.summaryImage = this.getSummaryImage(this.temperatureData.summaryPhrase);
@@ -94,8 +93,8 @@ export class WeatherService {
     while(weekCount < 7){
       this.weekData.push(new WeekData());
       this.weekData[weekCount].day = this.weatherDetails['v3-wx-forecast-daily-15day'].dayOfWeek[weekCount].slice(0,3);
-      this.weekData[weekCount].tempMax = this.weatherDetails['v3-wx-forecast-daily-15day'].calendarDayTemperatureMax[weekCount].toString();
-      this.weekData[weekCount].tempMin = this.weatherDetails['v3-wx-forecast-daily-15day'].calendarDayTemperatureMin[weekCount].toString();
+      this.weekData[weekCount].tempMax = this.weatherDetails['v3-wx-forecast-daily-15day'].calendarDayTemperatureMax[weekCount];
+      this.weekData[weekCount].tempMin = this.weatherDetails['v3-wx-forecast-daily-15day'].calendarDayTemperatureMin[weekCount];
       this.weekData[weekCount].summaryImage = this.getSummaryImage(this.weatherDetails['v3-wx-forecast-daily-15day'].narrative[weekCount]);
       weekCount++;
     
@@ -107,7 +106,7 @@ export class WeatherService {
     var todayCount = 0;
 
     while(todayCount < 7){
-      this.todaydata.push(new TodayData());
+      this.todaydata.push(new Todaydata());
       this.todaydata[todayCount].time = this.getTimeFromString(this.weatherDetails['v3-wx-forecast-hourly-10day'].validTimeLocal[todayCount]);
       this.todaydata[todayCount].temperature = this.weatherDetails['v3-wx-forecast-hourly-10day'].temperature[todayCount];
       this.todaydata[todayCount].summaryImage = this.getSummaryImage(this.weatherDetails['v3-wx-forecast-hourly-10day'].wxPhraseShort[todayCount]);  
@@ -123,7 +122,7 @@ export class WeatherService {
   //method to get todays highlight data from the base variable
   fillTodaysHighlight(){
     this.todaysHighlight.airQuality = this.weatherDetails['v3-wx-globalAirQuality'].globalairquality.airQualityIndex;
-    this.todaysHighlight.humidity = this.weatherDetails['v3-wx-observations-current'].precip24Hour;
+    this.todaysHighlight.humidity = this.weatherDetails['v3-wx-observations-current'].relativeHumidity;
     this.todaysHighlight.sunrise = this.getTimeFromString(this.weatherDetails['v3-wx-observations-current'].sunriseTimeLocal);
     this.todaysHighlight.sunset = this.getTimeFromString(this.weatherDetails['v3-wx-observations-current'].sunsetTimeLocal);
     this.todaysHighlight.uvIndex = this.weatherDetails['v3-wx-observations-current'].uvIndex;
@@ -150,11 +149,11 @@ export class WeatherService {
   }
 
   celsiusToFahrenheit(celsius:number):number{
-    return (celsius * 1.8) + 32;
+    return +((celsius * 1.8) + 32).toFixed(2);
   }
 
   fahrenheitToCelsius(fahrenheit:number):number{
-    return (fahrenheit - 32) * 0.555;
+    return +((fahrenheit - 32) * 0.555).toFixed(2);
   }
 
 
@@ -189,6 +188,12 @@ export class WeatherService {
   }
 
   getData(){
+
+    this.todaydata = [];
+    this.weekData= [];
+    this.temperatureData = new TemperatureData();
+    this.todaysHighlight = new TodaysHighlight();
+
     var latitude = 0;
     var longitude = 0;
     this.getLocationDetails(this.cityName,this.language).subscribe({

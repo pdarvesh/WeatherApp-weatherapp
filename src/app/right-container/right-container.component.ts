@@ -32,8 +32,10 @@ export class RightContainerComponent {
 
 //function for click of Today
 onTodayClick(){
-
+  this.weatherService.week = false;
+  this.weatherService.today = true;
 }
+
 
 //function for click of Week
 onWeekClick(){

@@ -1,8 +1,8 @@
 <div class="left-container">
     <div class="left-container-nav-bar">
-        <div class="search-icon"><fa-icon [icon]="faMagnifyingGlass"></fa-icon></div>
-        <div class="search-input"><input type="text" placeholder="Seach for places..."></div>
-        <div class="location-icon"><fa-icon [icon]="faLocation"></fa-icon></div>
+        <div class="search-icon" (click)="onSearch(location.value)"><fa-icon [icon]="faMagnifyingGlass"></fa-icon></div>
+        <div class="search-input"><input type="text" placeholder="Seach for places..."#location (keyup.Enter)="onSearch(location.value)"></div>
+        <div class="location-icon" (click)="onSearch(location.value)"><fa-icon [icon]="faLocation"></fa-icon></div>
     </div>
     <div class="left-container-data-box">
         <div class="left-container-temp-data">
