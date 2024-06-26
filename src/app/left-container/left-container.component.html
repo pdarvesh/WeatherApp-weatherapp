@@ -1,0 +1,34 @@
+<div class="left-container">
+    <div class="left-container-nav-bar">
+        <div class="search-icon"><fa-icon [icon]="faMagnifyingGlass"></fa-icon></div>
+        <div class="search-input"><input type="text" placeholder="Seach for places..."></div>
+        <div class="location-icon"><fa-icon [icon]="faLocation"></fa-icon></div>
+    </div>
+    <div class="left-container-data-box">
+        <div class="left-container-temp-data">
+            <div class="left-container-temp-img"><img src = {{this.weatherService.temperatureData.summaryImage}} alt="Summary Image"></div>
+            <div class="left-container-temp-value">{{this.weatherService.celsius == true? this.weatherService.temperatureData.temperature : this.weatherService.celsiusToFahrenheit(this.weatherService.temperatureData.temperature)}}<sup>{{this.weatherService.celsius == true ? "°C" : "°F"}} </sup></div>
+            <div class="left-container-day-time">{{this.weatherService.temperatureData.day}},<span> {{this.weatherService.temperatureData.time}}</span></div>
+
+        </div>
+        <div class="dividing-line"></div>
+        <div class="left-container-other-details">
+            <div class="left-container-temp-summary">
+                <div class="left-container-temp-summary-phrase-img"><fa-icon [icon]="faCloud"style="color:rgb(40, 153, 252);"></fa-icon></div>
+                <div class="left-container-summary-value">{{this.weatherService.temperatureData.summaryPhrase}}</div>               
+            </div>
+            <div class="left-container-rain-stats">
+                <div class="left-container-rain-stats-img"><fa-icon [icon]="faCloudRain"style="color:rgb(40, 153, 252);"></fa-icon></div>  
+                <div class="left-container-rain-stats-value">Rain - {{this.weatherService.temperatureData.rainPercent}}%</div>
+            </div>
+            <div class="left-container-location-details">
+                <div class="left-container-location-img"><img src="/assets/chicago-city.jpg" alt=""></div>
+                <div class="left-container-location-name">{{this.weatherService.temperatureData.location}}</div>
+            </div>    
+        </div>
+
+    </div>
+</div>
+
+
+

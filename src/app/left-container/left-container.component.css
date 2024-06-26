@@ -1,0 +1,165 @@
+
+.left-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+/* css for left container- nav-bar -----------------------------*/
+.left-container-nav-bar{
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.search-icon{
+    flex: 2;
+    text-align: right;
+    margin-right: 5px;
+}
+
+.search-input{
+    flex: 4;
+
+}
+
+.search-input input{
+    border: none;
+    padding: 8px; 
+    font-size: medium;
+    color: black;
+
+}
+
+.location-icon{
+    flex: 2;
+    text-align: center;
+
+}
+.location-icon fa-icon{
+    padding: 3px;
+    background-color: aliceblue;
+    border-radius: 500px;
+    margin-right: 12px;
+}
+
+/* css for left- container data -----------------------------------------------*/
+
+.left-container-data-box{
+    flex: 12;
+    display: flex;
+    flex-direction: column;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+/* tempreture data: Image value and Date-time */
+.left-container-temp-data{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.left-container-temp-img{
+    flex: 2;
+
+}
+.left-container-temp-img img{
+    width: 150px;
+    height: 150px;
+    
+}
+.left-container-temp-value{
+    flex: 1;
+    font-size: 50px;
+    font-weight: bold;
+}
+.left-container-temp-value sup{
+    position: relative;
+    margin-top: 5px;
+}
+.left-container-day-time{
+    flex: 1;
+    font-weight: 500;
+    color: black;
+    font-size: 20px;
+}
+
+.left-container-day-time span{
+    color: rgb(40, 153, 252);
+}
+
+
+.dividing-line{
+    height: 2px;
+    width: 100%;
+    background-color: rgb(129, 192, 247);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/* tempreture data: Summary phrase and rain value and location image a nd location details--------- */
+.left-container-other-details{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+}
+/* css for .left-container-temp-summary ------ */
+
+.left-container-temp-summary{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    font-size: medium;
+    font-weight: 500;
+}
+.left-container-temp-summary-phrase-img{
+    margin-right: 8px;
+}
+/* .left-container-summary-value{
+    flex: ;
+} */
+
+/* Css for left-container-rain-stats --------- */
+.left-container-rain-stats{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    font-size: medium;
+    font-weight: 500;
+
+}
+.left-container-rain-stats-img{
+    margin-right: 8px;
+}
+/* .left-container-rain-stats-value{
+    
+} */
+
+/* css for left-container-location-details ------- */
+.left-container-location-details{
+    flex: 3;
+    text-align: center;
+    
+}
+.left-container-location-img{
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.left-container-location-img img{
+    width: 250px;
+    height: 110px;
+    border-radius: 20px;
+
+}
+.left-container-location-name{
+    margin-top: -80px;
+    font-size: medium;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+
+
+
